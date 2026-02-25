@@ -1,0 +1,169 @@
+:root{
+    --main-text-color: #FFFFFF;
+    --text: #94A3B8;
+    --table-color: #111722;
+    --main-btn-color: #1152D4;
+    --border-color: #232F48;
+    --cancel-btn-color: #D41111;
+}
+
+.inventory-content {
+    padding: 20px 50px;
+    background-color: #0c0f17;
+}
+
+
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+h1{
+    color: var(--main-text-color);
+    font-size: 3rem;
+}
+
+.description{
+    color: var(--text);
+}
+
+.btn-add {
+    background-color: var(--main-btn-color);
+    color: var(--main-text-color);
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #1146ae;
+}
+
+.card{
+    width: 200px;
+    padding: 18px;
+    background-color: var(--table-color);
+    margin-bottom: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.card span{
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.card h2 {
+    color: var(--main-text-color);
+    font-size: 1.7rem;
+}
+
+
+.table-container {
+    background-color: var(--table-color);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #92A4C9;
+}
+
+.inventory-table th {
+    text-align: left;
+    font-size: 12px;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    color: #5F739C;
+}
+
+.inventory-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+.vehicle-info{
+    display: flex;
+}
+
+
+.vehicle-info strong {
+    display: block;
+    color: var(--main-text-color);
+    font-size: 16px;
+}
+
+.img-container{
+    width: 8vw;
+    height: 60px;
+    border-radius: 13px;
+
+    margin-right: 15px;
+}
+
+.img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    border-radius: 13px;
+}
+
+
+.vehicle-info span {
+    font-size: 12px;
+    color: var(--main-btn-color);
+}
+
+.details-top-container{
+    color: var(--main-text-color);
+}
+
+.vehicle-price {
+    color: var(--main-text-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit, .btn-delete {
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-edit{
+    background-color: #1152d41d;;
+}
+
+.btn-delete{
+    background-color: #ef444418;
+}
+
+.btn-edit:hover { background: var(--main-btn-color); }
+.btn-delete:hover { background: var(--cancel-btn-color); }
+
+.btn-edit img, .btn-delete img {
+    width: 18px;
+    transition: filter 0.3s ease;
+}
+
+.btn-edit:hover img, .btn-delete:hover img {
+    filter: brightness(0) invert(1); 
+}
