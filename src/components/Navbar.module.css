@@ -1,0 +1,139 @@
+:root{
+    --main-text-color: #FFFFFF;
+    --text: #94A3B8;
+    --table-color: #111722;
+    --main-btn-color: #1152D4;
+}
+
+.navbar {
+    background-color: #0c0f17;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 1px solid #161d2b;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo-icon{
+    background-color: var(--main-btn-color);
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon img{
+    padding: 11px 10px;
+}
+
+.nav-logo {
+    color: var(--main-text-color);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    color: #92a4c9;
+    text-decoration: none;
+    
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    color: var(--main-text-color);
+}
+
+.nav-item.active {
+    color: var(--main-text-color);
+    position: relative;
+}
+
+/* La rayita azul debajo del menú activo */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: var(--main-btn-color);
+}
+
+
+.nav-notif{
+    background-color: var(--table-color);
+    border: none;
+    padding: 8px 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-notif:hover {
+    background-color: #ffffff18;
+}
+
+.nav-notif img {
+    width: 18px;
+    transition: filter 0.3s ease;
+}
+
+
+/* Perfil de Usuario */
+.nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-text {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.user-name {
+    color: var(--main-text-color);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-role {
+    color: var(--main-btn-color);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-avatar img{
+    border-radius: 8px;
+}
