@@ -157,11 +157,11 @@
     object-fit: cover;
 }
 
-.btn-remove-img {
+.btn-remove-img, .btn-remove-principal {
     position: absolute;
     top: 2px;
     right: 2px;
-    background: rgba(255, 0, 0, 0.7);
+    background: var(--cancel-btn-color);
     color: var(--main-text-color);
     border: none;
     border-radius: 50%;
@@ -170,6 +170,10 @@
     height: 20px;
     display: flex;
     justify-content: center;
+}
+
+.btn-remove-principal{
+    background-color: var(--table-color);
 }
 
 

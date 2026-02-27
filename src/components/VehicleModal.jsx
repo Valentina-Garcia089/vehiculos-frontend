@@ -25,34 +25,53 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
         marca: "",
         modelo: "",
         color: "",
-        year: 0,
-        precio: 0,
-        kilometraje: 0,
+        year: "",
+        precio: "",
+        kilometraje: "",
         gasolina: "GASOLINA",
         descripcion: "",
         disponible: true,
         imageUrl: "",
-        urlsGaleria: []
+        imagenes: []
     });
 
 
-    //actualizar estado cuando se escribe - todos los input
-    const handleChange = (e) =>{
-        const { name, value, type } = e.target;
-        setFormData({
-            ...formData,
-            [name]: type === 'number' ? Number(value) : value
-        });
-    };
+    //para editar un vehiculo
+    useEffect(() => {
+        if(isOpen){
+            if(vehicleToEdit){
+                console.log("DATOS RECIBIDOS DEL BACKEND:", vehicleToEdit); /////////////TODO
+                setFormData({
+                    ...vehicleToEdit,
+                    imagenes: vehicleToEdit.imagenes?.map(img => img.imageUrl) || []
+                })
+            }else{
+                setFormData({
+                    marca: "",
+                    modelo: "",
+                    color: "",
+                    year: "",
+                    precio: "",
+                    kilometraje: "",
+                    gasolina: "GASOLINA",
+                    descripcion: "",
+                    disponible: true,
+                    imageUrl: "",
+                    imagenes: []
+                })
+            }
+        }
+    }, [vehicleToEdit, isOpen])
+
 
 
     const addImageUrl = () => {
         if (imageUrlInput.trim() !== "") {
-            //copia de todas las img en urlsGaleria más la del input
-            const nuevasUrls = [...formData.urlsGaleria, imageUrlInput];
+            //copia de todas las img en imagenes más la del input
+            const nuevasUrls = [...formData.imagenes, imageUrlInput];
             setFormData({
             ...formData,
-            urlsGaleria: nuevasUrls,
+            imagenes: nuevasUrls,
             //si es la primera imagen en agregarse queda como portada
             imageUrl: formData.imageUrl === "" || formData.imageUrl.includes("url-de-tu-imagen") 
                     ? imageUrlInput 
@@ -66,7 +85,38 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
     const removeImageUrl = (indexToRemove) => {
         setFormData({
             ...formData,
-            urlsGaleria: formData.urlsGaleria.filter((_, index) => index !== indexToRemove)
+            imagenes: formData.imagenes.filter((_, index) => index !== indexToRemove)
+        });
+    };
+
+    const removePrincipalImage = () => {
+        //TODO- REVISAR LA PERSISTENCIA PORQUE AL REFRESCAR, LA IMAGEN SIGUE HACIENDO PARTE DE LA GALERIA
+        setFormData(prev => {
+            const tieneGaleria = prev.imagenes.length > 0;
+            
+            //si la galería tiene elementos, el primero pasa a ser la imagen principal
+            const nuevaPrincipal = tieneGaleria ? prev.imagenes[0] : "";
+
+            //si se sube a principal, hay que quitarla de la galeria para que no quede repetida
+            const nuevasSecundarias = tieneGaleria 
+                ? prev.imagenes.filter((_, index) => index !== 0) 
+                : [];
+
+            return {
+                ...prev,
+                imageUrl: nuevaPrincipal,
+                imagenes: nuevasSecundarias
+            };
+        });
+    };
+
+
+    //actualizar estado cuando se escribe - todos los input
+    const handleChange = (e) =>{
+        const { name, value, type } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === 'number' ? (value === '' ? '' : Number(value)) : value
         });
     };
 
@@ -76,7 +126,13 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
 
         try{
             const token = localStorage.getItem("token");
-            const respuesta = await axios.post("http://localhost:8080/api/vehicles", formData, {
+            const url = vehicleToEdit ?
+                `http://localhost:8080/api/vehicles/${vehicleToEdit.id}`
+                :"http://localhost:8080/api/vehicles";
+
+            const metodo = vehicleToEdit ? axios.put : axios.post;
+
+            await metodo(url, formData, {
                 headers: {Authorization: `Bearer ${token}`}
             });
             onRefresh();
@@ -89,7 +145,7 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
                 console.error("Error de red o configuración:", error.message);
             }
         }
-    }
+    };
 
 
     if(!isOpen) return null
@@ -109,37 +165,37 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
                     <div className={styles['form-grid']}>
                         <label className={styles['label-group']}>
                             <span>Marca</span>
-                            <input type="text" id="marca" name="marca" placeholder="Ej: Toyota" onChange={handleChange} required />
+                            <input value={formData.marca} type="text" id="marca" name="marca" placeholder="Ej: Toyota" onChange={handleChange} required />
                         </label>
                         
                         <label className={styles['label-group']}>
                             <span>Modelo</span>
-                            <input type="text" name="modelo" placeholder="Ej: Corolla" onChange={handleChange} required />
+                            <input value={formData.modelo} type="text" name="modelo" placeholder="Ej: Corolla" onChange={handleChange} required />
                         </label>
 
                         <label className={styles['label-group']}>
                             <span>Color</span>
-                            <input type="text" name="color" placeholder="Ej: negro" onChange={handleChange} required/>
+                            <input value={formData.color} type="text" name="color" placeholder="Ej: negro" onChange={handleChange} required/>
                         </label>
                         
                         <label className={styles['label-group']}>
                             <span>Año</span>
-                            <input type="number" name="year" placeholder="Ej: 2010" onChange={handleChange} required />
+                            <input value={formData.year} type="number" name="year" placeholder="Ej: 2010" onChange={handleChange} required />
                         </label>
                         
                         <label className={styles['label-group']}>
                             <span>Precio</span>
-                            <input type="number" name="precio" placeholder="Ej: precio" onChange={handleChange} required />
+                            <input value={formData.precio} type="number" name="precio" placeholder="Ej: precio" onChange={handleChange} required />
                         </label>
                         
                         <label className={styles['label-group']}>
                             <span>Kilometraje</span>
-                            <input type="number" name="kilometraje" placeholder="Ej: 200" onChange={handleChange} required />
+                            <input value={formData.kilometraje} type="number" name="kilometraje" placeholder="Ej: 200" onChange={handleChange} required />
                         </label>
                         
                         <label className={styles['label-group']}>
                             <span>Tipo de combustible</span>
-                            <select name="gasolina" onChange={handleChange}>
+                            <select value={formData.gasolina} name="gasolina" onChange={handleChange}>
                                 <option value="GASOLINA">Gasolina</option>
                                 <option value="DIESEL">Diesel</option>
                                 <option value="ELECTRICO">Eléctrico</option>
@@ -149,7 +205,7 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
                     </div>
                     <label className={styles['label-group']}>
                         <span>Descripción</span>
-                        <textarea name="descripcion" placeholder="Descripción del vehículo" onChange={handleChange}></textarea>
+                        <textarea value={formData.descripcion} name="descripcion" placeholder="Descripción del vehículo" onChange={handleChange}></textarea>
                     </label>
                     
 
@@ -168,7 +224,19 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
                         </div>
 
                         <div className={styles['image-preview-grid']}>
-                            {formData.urlsGaleria.map((url, index) => (
+                            {formData.imageUrl && (
+                                <div className={`${styles['image-thumb']} ${styles['main-cover']}`}>
+                                    <img src={formData.imageUrl} alt="Imagen principal" />
+                                    <button 
+                                        type="button" 
+                                        onClick={removePrincipalImage}
+                                        className={styles['btn-remove-principal']}
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                            )}
+                            {formData.imagenes.map((url, index) => (
                                 <div key={index} className={styles['image-thumb']}>
                                     <img src={url} alt="Imagen del vehiculo" />
                                     <button 
