@@ -1,8 +1,11 @@
 :root{
+    --background-color: #0c0f17;
     --main-text-color: #FFFFFF;
     --text: #94A3B8;
     --table-color: #111722;
     --main-btn-color: #1152D4;
+    --border-color: #232F48;
+    --cancel-btn-color: #D41111;
 }
 
 .navbar {
@@ -99,24 +102,10 @@
     transition: filter 0.3s ease;
 }
 
-
-/* Perfil de Usuario */
 .nav-profile {
     display: flex;
     align-items: center;
     gap: 12px;
-}
-
-.user-text {
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-}
-
-.user-name {
-    color: var(--main-text-color);
-    font-size: 14px;
-    font-weight: 600;
 }
 
 .user-role {
@@ -126,14 +115,83 @@
 }
 
 .user-avatar {
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
+    width: 45px;
+    height: 45px;
+    background-color: #161c26;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    color: var(--main-btn-color);
+    font-size: 0.9rem;
 }
 
-.user-avatar img{
-    border-radius: 8px;
+.nav-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: #161c26;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px 0;
+    min-width: 150px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    color: var(--text);
+    text-decoration: none;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 14px;
+    width: 100%;
+    cursor: pointer;
+
+    transition: all 0.2s ease-out;
+}
+
+.dropdown-item:hover {
+    background-color: var(--table-color);
+    color: var(--main-btn-color); 
+}
+
+.nav-auth-buttons{
+    display: flex;
+    gap: 12px;
+}
+
+.btn-login, .btn-register{
+    padding: 10px 16px;
+    color: var(--main-text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-register{
+    background-color: var(--main-btn-color);
+    border-radius: 12px;
+}
+
+.btn-register:hover {
+    background-color: #1146ae;
+}
+
+.btn-login:hover {
+    color: var(--main-btn-color);
+}
+

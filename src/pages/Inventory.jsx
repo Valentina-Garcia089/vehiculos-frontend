@@ -3,7 +3,7 @@ import deleteIcon from "../assets/icons/delete-icon.png"
 import editIcon from "../assets/icons/edit-icon.png"
 import axios from "axios"
 import styles from "./Inventory.module.css"
-import VehicleModal from "../components/VehicleModal";
+import VehicleModal from "../components/VehicleCreateModal";
 
 import { useEffect, useState } from "react";
 
