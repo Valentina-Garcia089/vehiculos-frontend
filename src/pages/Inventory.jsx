@@ -10,6 +10,47 @@ import { useEffect, useState } from "react";
 function Inventory() {
     const [vehicles, setVehicles] = useState([]); //lista de vehiculos
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+
+    //guardar el vehiculo para poderlo editar
+    const handleEditClick = async (vehicle) =>{
+        try{
+            const token = localStorage.getItem("token");
+            const respuesta = await axios.get(`http://localhost:8080/api/vehicles/${vehicle.id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            setSelectedVehicle(respuesta.data);
+            setIsModalOpen(true);
+        }catch (error) {
+            console.error("Error al obtener detalle del vehículo", error);
+        }
+    }
+
+    const handleCreateClick = () =>{
+        setSelectedVehicle(null);
+        setIsModalOpen(true);
+    }
+
+
+    const handleDeleteClick = async (id) =>{
+        const confirmar = window.confirm("¿Está seguro de eliminar este vehículo? Esta acción no se puede deshacer");
+        
+        if (!confirmar) return;
+
+        try {
+            const token = localStorage.getItem("token");
+            await axios.delete(`http://localhost:8080/api/vehicles/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            fetchVehicles(); 
+            alert("Vehículo eliminado con éxito");
+        } catch (error) {
+            console.error("Error al eliminar:", error);
+            alert("No se pudo eliminar el vehículo. Verifica los permisos.");
+        }
+    }
 
     const fetchVehicles = async () =>{
         try{
@@ -29,6 +70,8 @@ function Inventory() {
         fetchVehicles();
     },[])
 
+
+
     return (
         <div className={styles['inventory-page']}>
             <Navbar />
@@ -41,7 +84,7 @@ function Inventory() {
                     </div>
                     <button 
                         className={styles['btn-add']}
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={handleCreateClick}
                     >
                         + NUEVO VEHÍCULO</button>
                 </header>
@@ -92,10 +135,18 @@ function Inventory() {
                                     </td>
                                     <td>
                                         <div className={styles['actions']}>
-                                            <button className={styles['btn-edit']} title="Editar">
+                                            <button 
+                                                onClick={() => handleEditClick(v)} 
+                                                className={styles['btn-edit']} 
+                                                title="Editar"
+                                            >
                                                 <img src={editIcon} alt="editar vehiculo" />
                                             </button>
-                                            <button className={styles['btn-delete']} title="Eliminar">
+                                            <button
+                                                onClick={() => handleDeleteClick(v.id)}
+                                                className={styles['btn-delete']} 
+                                                title="Eliminar"
+                                            >
                                                 <img src={deleteIcon} alt="eliminar vehiculo" />
                                             </button>
                                         </div>
@@ -110,6 +161,7 @@ function Inventory() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onRefresh={fetchVehicles} //muestra nuevamente el inventario
+                vehicleToEdit={selectedVehicle}
             />
         </div>
     );

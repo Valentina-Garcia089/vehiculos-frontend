@@ -2,6 +2,7 @@ import styles from "./Navbar.module.css"
 import logo from "../assets/icons/logo.png"
 import notifications from "../assets/icons/notifications.png"
 import profile from "../assets/icons/profile.png"
+import { NavLink } from 'react-router-dom';
 
 
 function Navbar(){
@@ -15,8 +16,12 @@ function Navbar(){
                     <h3>BuscaTuVehiculo</h3>
                 </div>
                 <div className={styles['nav-menu']}>
-                    <a href="/inventory" className={styles['nav-item active']}>Inventario</a>
-                    <a href="/consultas" className={styles['nav-item']}>Consultas</a>
+                    <NavLink to="/inventory" className={({ isActive }) => isActive ? `${styles['nav-item']} ${styles['active']}` : styles['nav-item']}>
+                        Inventario
+                    </NavLink>
+                    <NavLink to="/inquiries" className={({ isActive }) => isActive ? `${styles['nav-item']} ${styles['active']}` : styles['nav-item']}>
+                        Consultas
+                    </NavLink>
                 </div>
             </div>
 

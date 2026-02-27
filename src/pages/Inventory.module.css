@@ -1,4 +1,5 @@
 :root{
+    --background-color: #0c0f17;
     --main-text-color: #FFFFFF;
     --text: #94A3B8;
     --table-color: #111722;
@@ -9,7 +10,7 @@
 
 .inventory-content {
     padding: 20px 50px;
-    background-color: #0c0f17;
+    background-color: var(--background-color);
 }
 
 
