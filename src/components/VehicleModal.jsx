@@ -40,7 +40,6 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
     useEffect(() => {
         if(isOpen){
             if(vehicleToEdit){
-                console.log("DATOS RECIBIDOS DEL BACKEND:", vehicleToEdit); /////////////TODO
                 setFormData({
                     ...vehicleToEdit,
                     imagenes: vehicleToEdit.imagenes?.map(img => img.imageUrl) || []
