@@ -1,7 +1,6 @@
 import Navbar from "../components/Navbar"
 import styles from "./Inquiries.module.css"
 import axios from "axios"
-import { use } from "react";
 
 import { useEffect, useState } from "react";
 
