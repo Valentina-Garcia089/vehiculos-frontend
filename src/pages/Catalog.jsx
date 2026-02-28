@@ -1,51 +1,46 @@
 import axios from "axios";
 import styles from "./Catalog.module.css";
-import Navbar from "../components/Navbar";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useCallback } from "react";
 import VehicleDetailModal from "../components/VehicleDetailModal";
 
 function Catalog (){
     const [vehicles, setVehicles] = useState([]);
     const [selectedBrands, setSelectedBrands] = useState([]);
-    const [maxPrice, setMaxPrice] = useState(500000000);
+    const [maxPrice, setMaxPrice] = useState(700000000);
     const [sortBy, setSortBy] = useState("default");
     const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     const brands = ['BMW', 'TESLA', 'PORSCHE', 'TOYOTA', 'KIA', 'RENAULT', 'AUDI', 'JEEP', 'CARRITO'];
 
 
-    useEffect (() =>{
-        fetchVehicles();
-    },[]);
+    const fetchVehicles = useCallback(async (page = 0) => {
+        try {
+            const params = new URLSearchParams({
+                page: page,
+                size: 12,
+                precioMax: maxPrice
+            });
 
-    const fetchVehicles = async () =>{
-        try{
-            const respuesta = await axios.get("http://localhost:8080/api/vehicles");
-            setVehicles(respuesta.data.content)
+            if (selectedBrands.length > 0) {
+                selectedBrands.forEach(brand => params.append("marcas", brand));
+            }
 
-            const prices = respuesta.data.content.map(v => v.precio);
-            if (prices.length > 0) setMaxPrice(Math.max(...prices));
-        }catch(error){
-            console.error("No fue posible obtener el catalogo de carros", error);
+            if (sortBy === "low") params.append("sort", "precio,asc");
+            if (sortBy === "high") params.append("sort", "precio,desc");
+
+            const respuesta = await axios.get(`http://localhost:8080/api/vehicles?${params.toString()}`);
+            
+            setVehicles(respuesta.data.content);
+            setTotalPages(respuesta.data.totalPages);
+            setCurrentPage(page);
+
+        } catch (error) {
+            console.error("No fue posible obtener el catálogo de carros", error);
         }
-    };
-
-
-    const filteredVehicles = useMemo(() => {
-        let result = [...vehicles];
-
-        if (selectedBrands.length > 0) {
-            result = result.filter(v => selectedBrands.includes(v.marca.toUpperCase()));
-        }
-
-        result = result.filter(v => v.precio <= maxPrice);
-
-        if (sortBy === "low") result.sort((a, b) => a.precio - b.precio);
-        if (sortBy === "high") result.sort((a, b) => b.precio - a.precio);
-
-        return result;
-    }, [vehicles, selectedBrands, maxPrice, sortBy]);
+    }, [selectedBrands, maxPrice, sortBy]);
 
 
     const handleCloseClick = () =>{
@@ -70,22 +65,25 @@ function Catalog (){
         setSelectedBrands(prev => 
             prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
         );
+        setCurrentPage(0);
     };
+
+    useEffect(() => {
+        fetchVehicles(0); //esto debe ocurrir al cargar o cambiar filtros (pag 0)
+    }, [fetchVehicles]);
 
 
 
 
     return (
         <div className={styles['catalog-page']}>
-            {/* <Navbar /> */}
-            
             <main className={styles['main-content']}>
                 <aside className={styles['filter-sidebar']}>
                     <div className={styles['sidebar-header']}>
                         <h3>Filtros</h3>
                         <button 
                             className={styles['clear-btn']}
-                            onClick={() => {setSelectedBrands([]); setSortBy("default")}}
+                            onClick={() => {setSelectedBrands([]); setSortBy("default"); setCurrentPage(0);}}
                         >
                             Limpiar Filtros
                         </button>
@@ -115,7 +113,7 @@ function Catalog (){
                         <input 
                             type="range" 
                             min="0" 
-                            max="500000000" 
+                            max="700000000" 
                             step="1000000"
                             value={maxPrice}
                             onChange={(e) => setMaxPrice(parseInt(e.target.value))}
@@ -128,7 +126,7 @@ function Catalog (){
                     <header className={styles['inventory-header']}>
                         <div className={styles['header-text']}>
                             <h1>Catálogo de Vehiculos</h1>
-                            <p>Se encontraron {filteredVehicles.length} resultados</p>
+                            <p>Se encontraron {vehicles.length} resultados</p>
                         </div>
                         <div className={styles['header-actions']}>
                             <select 
@@ -144,7 +142,7 @@ function Catalog (){
                     </header>
 
                     <div className={styles['vehicle-grid']}>
-                        {filteredVehicles.map((v) => (
+                        {vehicles.map((v) => (
                             <div 
                                 key={v.id} 
                                 className={styles['vehicle-card']}
@@ -180,13 +178,29 @@ function Catalog (){
                             </div>
                         ))}
                     </div>
+                    <div className={styles['pagination']}>
+                        <button 
+                            disabled={currentPage === 0} 
+                            onClick={() => fetchVehicles(currentPage - 1)}
+                        > 
+                            ‹
+                        </button>
+                        <span>{currentPage + 1} de {totalPages}</span>
+                        <button 
+                            className={styles['page-btn']}
+                            disabled={currentPage >= totalPages - 1} 
+                            onClick={() => fetchVehicles(currentPage + 1)}
+                        > 
+                            ›
+                        </button>
+                    </div>
                 </section>
             </main>
             <VehicleDetailModal 
                 isModalOpen={isModalOpen}
                 selectedVehicle={selectedVehicle}
                 onClose={handleCloseClick}
-                onRefresh={fetchVehicles}
+                onRefresh={() => fetchVehicles(currentPage)}
             />
         </div>
     );
