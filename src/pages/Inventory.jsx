@@ -74,7 +74,7 @@ function Inventory() {
 
     return (
         <div className={styles['inventory-page']}>
-            <Navbar />
+            {/* <Navbar /> */}
             
             <main className={styles['inventory-content']}>
                 <header className={styles['inventory-header']}>

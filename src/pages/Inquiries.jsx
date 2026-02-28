@@ -54,7 +54,6 @@ function Inquiries (){
 
     return (
         <div className={styles['inquiries-page']}>
-            <Navbar />
             <div className={styles['inquiries-container']}>
                 
                 <div className={styles['inquiries-list']}>
