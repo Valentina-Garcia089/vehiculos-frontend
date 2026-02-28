@@ -1,0 +1,152 @@
+:root{
+    --background-color: #0c0f17;
+    --main-text-color: #FFFFFF;
+    --text: #94A3B8;
+    --table-color: #111722;
+    --main-btn-color: #1152D4;
+    --border-color: #232F48;
+    --cancel-btn-color: #D41111;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--background-color); 
+}
+
+.profile-card {
+    background-color: var(--table-color); 
+    border: 1px solid var(--border-color); 
+    border-radius: 24px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.avatar-circle {
+    width: 90px;
+    height: 90px;
+    background: var(--main-btn-color);
+    color: var(--main-text-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 auto 25px;
+    text-transform: uppercase;
+}
+
+.profile-card h2 {
+    color: var(--main-text-color);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.info-grid {
+    text-align: left;
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.info-item label {
+    display: block;
+    color: var(--text); 
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.edit-input {
+    width: 100%;
+    background-color: #1a2230;
+    border: 1px solid var(--border-color);
+    color: var(--main-text-color);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 5px;
+}
+
+.edit-input:focus {
+    border-color: var(--main-btn-color);
+}
+
+.info-item p {
+    color: var(--main-text-color); 
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--light-border-color); 
+    padding-bottom: 12px;
+    margin: 0;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.btn-save {
+    flex: 2; 
+    background-color: var(--main-btn-color);
+    color: var(--main-text-color);
+    border: none;
+}
+
+.btn-save, .btn-cancel, .btn-edit{
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel {
+    flex: 1;
+    background-color: transparent;
+    border: 1.5px solid var(--cancel-btn-color); 
+    color: var(--cancel-btn-color);
+}
+
+.btn-cancel:hover {
+    background-color: var(--cancel-btn-color);
+    color: var(--main-text-color);
+}
+
+.btn-edit {
+    margin-top: 45px;
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid var(--main-btn-color); 
+    color: var(--main-btn-color);
+    font-size: 1rem;
+}
+
+.btn-edit:hover, .btn-save:hover {
+    background: var(--main-btn-color);
+    color: var(--main-text-color);
+    box-shadow: 0 4px 15px rgba(17, 82, 212, 0.4);
+}
