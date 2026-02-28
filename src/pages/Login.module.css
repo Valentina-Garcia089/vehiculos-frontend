@@ -1,25 +1,38 @@
+:root{
+    --background-color: #0c0f17;
+    --main-text-color: #FFFFFF;
+    --text: #94A3B8;
+    --table-color: #111722;
+    --main-btn-color: #1152D4;
+    --border-color: #232F48;
+    --cancel-btn-color: #D41111;
+    --light-border-color: #334155;
+}
+
 .login-window{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #111722;
+    background-color: var(--background-color);
 }
 
 .login-container{
-    background-color: #FFFFFF;
+    background-color: var(--main-text-color);
     border-radius: 20px;
     width: clamp(28rem, 56vw, 47rem);
     height: 80vh;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-
     display: flex;
     justify-content: center;
     align-items: center;
 
     padding: 12px;
     gap: 12px;
+}
 
+.reversed-container{
+    flex-direction: row-reverse;
 }
 
 .img-container{
@@ -40,14 +53,15 @@
     flex-direction: column;
     padding: 10px 40px;
     width: 50%;
-    /* max-width: 400px; */
-    height: 85%;
-    gap: 20px;
+    max-width: 400px;
+    height: auto;
+    min-height: 85%;
+    gap: 14px;
 }
 
 
 .login-card h2 {
-    color: #232F48;
+    color: var(--table-color);
     text-align: center;
 }
 
@@ -57,7 +71,7 @@
 
 .login-input {
     padding: 12px 15px;
-    border: 1px solid #92A4C9;
+    border: 1px solid var(--light-border-color);
     border-radius: 6px;
     font-size: 16px;
     outline: none;
@@ -69,8 +83,8 @@
 }
 
 .login-button {
-    background-color: #1152D4;
-    color: white;
+    background-color: var(--main-btn-color);
+    color: var(--main-text-color);
     padding: 12px;
     border: none;
     border-radius: 6px;
@@ -90,7 +104,8 @@
 }
 
 .error-message {
-    color: #D41111;
+    text-align: center;
+    color: var(--cancel-btn-color);
     background-color: #FEEEEE;
     padding: 10px;
     border-radius: 4px;

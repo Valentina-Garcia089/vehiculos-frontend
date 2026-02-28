@@ -35,6 +35,7 @@ function Login(){
     };
 
 
+    
     return (
         <>
             <div className={styles['login-window']}>
@@ -51,8 +52,7 @@ function Login(){
                         <h2>BuscaTuVehiculo</h2>
                         <p className={styles['description']}>Ingresa a tu cuenta</p>
 
-                        {/* condicional, si tiene contenido muestra la etiqueta p */}
-                        {errorMsg && <p className="error-message">{errorMsg}</p>}
+                        {errorMsg && <p className={styles['error-message']}>{errorMsg}</p>}
 
                         <input 
                             className={styles['login-input']}
