@@ -1,7 +1,10 @@
 import styles from "./Landing.module.css"
 import videoBg from "../assets/videos/landing-video.mp4";
+import { useNavigate } from 'react-router-dom';
 
 function Landing (){
+    const navigate = useNavigate();
+
     return(
         <div className={styles['landing-container']}>
             <video 
@@ -23,7 +26,12 @@ function Landing (){
                     de vida
                 </p>
                 <div className={styles['btn-container']}>
-                    <button className={styles['btn-primary']}>Compra tu carro</button>
+                    <button 
+                        className={styles['btn-primary']}
+                        onClick={() => navigate("/catalog")}
+                    >
+                        Compra tu carro
+                    </button>
                 </div>
             </div>
         </div>

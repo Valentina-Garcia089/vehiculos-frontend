@@ -3,6 +3,7 @@ import background from "../assets/background/haikei.png"
 
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react"
+import { jwtDecode } from "jwt-decode";
 import axios from "axios"
 
 function Login(){
@@ -25,9 +26,19 @@ function Login(){
 
             //verificación del token recibido:
             console.log("token: ", respuesta.data.token);
-            localStorage.setItem("token", respuesta.data.token);
+            const token = respuesta.data.token; 
+            localStorage.setItem("token", token);
 
-            navigate("/inventory"); //después del submit ya lleva a la pagina de inventario
+            const decoded = jwtDecode(token);
+            const rawRole = decoded.rol && decoded.rol.length > 0 ? decoded.rol[0] : null;
+            const cleanRole = rawRole ? rawRole.replace("ROLE_", "") : null;
+            localStorage.setItem("role", cleanRole);
+
+            if (cleanRole === "ADMIN") {
+                navigate("/inventory");
+            } else {
+                navigate("/catalog");
+            }
         } catch (error){
             setErrorMsg("Tus datos no son correctos");
             console.error("Error: ", error);

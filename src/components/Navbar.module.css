@@ -5,12 +5,11 @@
     --table-color: #111722;
     --main-btn-color: #1152D4;
     --border-color: #232F48;
-    --cancel-btn-color: #D41111;
 }
 
 .navbar {
-    background-color: #0c0f17;
-    height: 70px;
+    background-color: var(--background-color);
+    height: 70px; /*TODO - tener en cuenta para calcular el alto del landing*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,9 +53,8 @@
     gap: 20px;
 }
 
-/* corregir algunos estilos */
 .nav-item {
-    color: #92a4c9;
+    color: var(--text);
     text-decoration: none;
     
     font-size: 14px;
@@ -184,11 +182,16 @@
 
 .btn-register{
     background-color: var(--main-btn-color);
+    border: 2px solid var(--main-btn-color); 
+    color: var(--main-btn-color);
     border-radius: 12px;
+    background: transparent;
 }
 
 .btn-register:hover {
-    background-color: #1146ae;
+    background: var(--main-btn-color);
+    color: var(--main-text-color);
+    box-shadow: 0 4px 15px rgba(17, 82, 212, 0.4);
 }
 
 .btn-login:hover {

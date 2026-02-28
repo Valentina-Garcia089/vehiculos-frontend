@@ -79,7 +79,7 @@
 }
 
 .login-input:focus {
-    border-color: #1152D4;
+    border-color: var(--main-btn-color);
 }
 
 .login-button {

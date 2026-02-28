@@ -23,7 +23,6 @@
     margin: 0 auto;
 }
 
-
 .inquiries-list {
     display: flex;
     flex-direction: column;
@@ -88,7 +87,6 @@
     font-size: 1.1rem;
 }
 
-/* Badges de Estado */
 .status-badge {
     font-size: 0.7rem;
     font-weight: 700;

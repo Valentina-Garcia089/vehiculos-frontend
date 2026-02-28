@@ -1,8 +1,7 @@
 import styles from "./Navbar.module.css"
 import logo from "../assets/icons/logo.png"
 import notifications from "../assets/icons/notifications.png"
-import profile from "../assets/icons/profile.png"
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState} from "react";
 import { jwtDecode } from "jwt-decode";
 
@@ -13,6 +12,7 @@ function Navbar(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navigate = useNavigate();
+    const location = useLocation(); 
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -29,9 +29,14 @@ function Navbar(){
             } catch (error) {
                 console.error("Error decodificando el token", error);
                 localStorage.removeItem("token");
+                setUserRole(null);
             }
         }
-    }, []);
+        else{
+            setUserRole(null);
+            setUserName("");
+        }
+    }, [location]);
 
     const toggleMenu = () =>{
         setIsMenuOpen(!isMenuOpen);
@@ -57,17 +62,26 @@ function Navbar(){
                     <h3>BuscaTuVehiculo</h3>
                 </div>
                 <div className={styles['nav-menu']}>
-                    {userRole === "ADMIN" ? (
+                    {userRole === "ADMIN" && (
                         <>
                             <NavLink to="/inventory" className={({ isActive }) => isActive ? `${styles['nav-item']} ${styles['active']}` : styles['nav-item']}>
-                            Inventario
+                                Inventario
                             </NavLink>
                             <NavLink to="/inquiries" className={({ isActive }) => isActive ? `${styles['nav-item']} ${styles['active']}` : styles['nav-item']}>
                                 Consultas
                             </NavLink>
                         </>
-                    ): (
-                        ""
+                    )}
+
+                    {userRole === "USER" && (
+                        <>
+                            <NavLink to="/catalog" className={({ isActive }) => isActive ? `${styles['nav-item']} ${styles['active']}` : styles['nav-item']}>
+                                Catálogo
+                            </NavLink>
+                            <NavLink to="/my-inquiries" className={({ isActive }) => isActive ? `${styles['nav-item']} ${styles['active']}` : styles['nav-item']}>
+                                Mis consultas
+                            </NavLink>
+                        </>
                     )}
                 </div>
             </div>
