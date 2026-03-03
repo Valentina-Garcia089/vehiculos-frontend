@@ -25,7 +25,7 @@ function Register (){
         });
     }
 
-
+    
     const handleSubmit = async (e) =>{
         e.preventDefault();
         setErrorMsg("");
