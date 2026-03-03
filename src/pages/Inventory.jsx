@@ -8,6 +8,7 @@ import VehicleModal from "../components/VehicleCreateModal";
 import { useEffect, useState } from "react";
 
 function Inventory() {
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [vehicles, setVehicles] = useState([]); //lista de vehiculos
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -17,7 +18,7 @@ function Inventory() {
     const handleEditClick = async (vehicle) =>{
         try{
             const token = localStorage.getItem("token");
-            const respuesta = await axios.get(`http://localhost:8080/api/vehicles/${vehicle.id}`, {
+            const respuesta = await axios.get(`${API_URL}/api/vehicles/${vehicle.id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setSelectedVehicle(respuesta.data);
@@ -40,7 +41,7 @@ function Inventory() {
 
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:8080/api/vehicles/${id}`, {
+            await axios.delete(`${API_URL}/api/vehicles/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -55,7 +56,7 @@ function Inventory() {
     const fetchVehicles = async () =>{
         try{
             const token = localStorage.getItem("token");
-            const respuesta = await axios.get("http://localhost:8080/api/vehicles/inventory", {
+            const respuesta = await axios.get(`${API_URL}/api/vehicles/inventory`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

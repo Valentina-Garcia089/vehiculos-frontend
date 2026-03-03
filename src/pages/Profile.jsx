@@ -3,6 +3,7 @@ import axios from "axios"
 import styles from './Profile.module.css';
 
 function Profile (){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [user, setUser] = useState(null);
 
     const [isEditing, setIsEditing] = useState(false);
@@ -15,7 +16,7 @@ function Profile (){
     const fetchProfile = async () => {
         try{
             const token = localStorage.getItem("token")
-            const respuesta = await axios.get("http://localhost:8080/api/users/my-profile", {
+            const respuesta = await axios.get(`${API_URL}/api/users/my-profile`, {
                 headers: {Authorization: `Bearer ${token}`}
             })
             setUser(respuesta.data);
@@ -35,7 +36,7 @@ function Profile (){
     const handleSave = async () =>{
         try{
             const token = localStorage.getItem("token");
-            const respuesta = await axios.put("http://localhost:8080/api/users/my-profile", formData, {
+            const respuesta = await axios.put(`${API_URL}/api/users/my-profile`, formData, {
                 headers: {Authorization: `Bearer ${token}`}
             });
 

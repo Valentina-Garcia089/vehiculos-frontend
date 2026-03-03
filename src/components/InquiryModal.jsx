@@ -3,6 +3,7 @@ import styles from "./InquiryModal.module.css"
 import axios from "axios"
 
 function QueryModal ({ isOpen, onClose, onRefresh, vehicleId, vehicleName}){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [comments, setComments] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -18,7 +19,7 @@ function QueryModal ({ isOpen, onClose, onRefresh, vehicleId, vehicleName}){
         
         try{
             const token = localStorage.getItem("token");
-            const respuesta = await axios.post("http://localhost:8080/api/inquiries", inquiryData, {
+            const respuesta = await axios.post(`${API_URL}/api/inquiries`, inquiryData, {
                 headers: {Authorization: `Bearer ${token}`}
             })
 

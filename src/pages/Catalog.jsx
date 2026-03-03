@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import VehicleDetailModal from "../components/VehicleDetailModal";
 
 function Catalog (){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [vehicles, setVehicles] = useState([]);
     const [selectedBrands, setSelectedBrands] = useState([]);
     const [maxPrice, setMaxPrice] = useState(700000000);
@@ -31,7 +32,7 @@ function Catalog (){
             if (sortBy === "low") params.append("sort", "precio,asc");
             if (sortBy === "high") params.append("sort", "precio,desc");
 
-            const respuesta = await axios.get(`http://localhost:8080/api/vehicles?${params.toString()}`);
+            const respuesta = await axios.get(`${API_URL}/api/vehicles?${params.toString()}`);
             
             setVehicles(respuesta.data.content);
             setTotalPages(respuesta.data.totalPages);
@@ -51,7 +52,7 @@ function Catalog (){
 
     const handleSelectClick = async (vehicle) =>{
         try{
-            const respuesta = await axios.get(`http://localhost:8080/api/vehicles/${vehicle.id}`);
+            const respuesta = await axios.get(`${API_URL}/api/vehicles/${vehicle.id}`);
             setSelectedVehicle(respuesta.data);
             setIsModalOpen(true);
         }catch(error){

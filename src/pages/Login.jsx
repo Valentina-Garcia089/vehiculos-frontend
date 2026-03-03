@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios"
 
 function Login(){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState(""); //solo en caso de que se tenga un error
@@ -19,7 +20,7 @@ function Login(){
 
         try{
             //envio a la api en java
-            const respuesta = await axios.post("http://localhost:8080/api/auth/login",{
+            const respuesta = await axios.post(`${API_URL}/api/auth/login`,{
                 email : email,
                 password : password
             });

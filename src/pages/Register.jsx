@@ -6,6 +6,7 @@ import { useState } from "react"
 import axios from "axios"
 
 function Register (){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [errorMsg, setErrorMsg] = useState("");
     const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ function Register (){
         setErrorMsg("");
 
         try{
-            const respuesta = await axios.post("http://localhost:8080/api/auth/register", formData);
+            const respuesta = await axios.post(`${API_URL}/api/auth/register`, formData);
             navigate("/login");
 
         }catch (error){

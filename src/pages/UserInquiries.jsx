@@ -5,6 +5,7 @@ import axios from "axios"
 import { useEffect, useState } from "react";
 
 function UserInquiries (){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [inquiries, setInquiries] = useState([]);
     const [selectedInquiry, setSelectedInquiry] = useState(null);
     //paginación
@@ -18,7 +19,7 @@ function UserInquiries (){
     const fetchInquiries = async (page = 0) =>{
         try{
             const token = localStorage.getItem("token");
-            const respuesta = await axios.get(`http://localhost:8080/api/inquiries/users/my-inquiries?page=${page}`, {
+            const respuesta = await axios.get(`${API_URL}/api/inquiries/users/my-inquiries?page=${page}`, {
                 headers: {Authorization: `Bearer ${token}`}
             })
             setInquiries(respuesta.data.content)

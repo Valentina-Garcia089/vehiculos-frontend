@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 
 function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [imageUrlInput, setImageUrlInput] = useState(""); //input texto
 
     //al cargar el modal debe desactivarse el scroll de inventario
@@ -126,8 +127,8 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
         try{
             const token = localStorage.getItem("token");
             const url = vehicleToEdit ?
-                `http://localhost:8080/api/vehicles/${vehicleToEdit.id}`
-                :"http://localhost:8080/api/vehicles";
+                `${API_URL}/api/vehicles/${vehicleToEdit.id}`
+                :`${API_URL}/api/vehicles`;
 
             const metodo = vehicleToEdit ? axios.put : axios.post;
 
