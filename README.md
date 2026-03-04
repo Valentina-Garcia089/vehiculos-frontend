@@ -13,7 +13,7 @@ Este es el cliente web de BuscaTuVehiculo, una interfaz dinámica diseñada para
 
 ---
 
-## Funcionalidades Clave
+## Estado del proyecto
  * Autenticación y Sesión: Implementación de registro e inicio de sesión integrados con el backend.
  * Gestión de Roles: El sistema detecta si el usuario es ADMIN o USER, redirigiéndolo automáticamente al panel del inventario del admin o al Catálogo de clientes.
  * Protección de Rutas: Uso de localStorage para persistir la sesión y asegurar que solo usuarios autorizados accedan a funciones administrativas.
