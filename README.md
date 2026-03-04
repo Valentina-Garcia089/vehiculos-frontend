@@ -1,16 +1,30 @@
-# React + Vite
+# BuscaTuVehiculo - Frontend
+Este es el cliente web de BuscaTuVehiculo, una interfaz dinámica diseñada para que los usuarios puedan explorar el catálogo de vehículos y los administradores gestionen el inventario en tiempo real. El proyecto se centra en ofrecer una experiencia de usuario fluida y segura.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Tecnologías Utilizadas
+ * React siendo la biblioteca principal para la construcción de la interfaz basada en componentes.
+ * React Router en la gestión de la navegación y protección de rutas según el rol del usuario.
+ * Axios para la comunicación eficiente con el backend mediante peticiones HTTP.
+ * JWT Decode en el procesamiento de tokens para extraer información del usuario y sus permisos.
+ * CSS Modules para tener estilos encapsulados evitando conflictos y manteniendo un código limpio.
+ * Vite como herramienta de construcción para un desarrollo rápido y optimizado.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Funcionalidades Clave
+ * Autenticación y Sesión: Implementación de registro e inicio de sesión integrados con el backend.
+ * Gestión de Roles: El sistema detecta si el usuario es ADMIN o USER, redirigiéndolo automáticamente al panel del inventario del admin o al Catálogo de clientes.
+ * Protección de Rutas: Uso de localStorage para persistir la sesión y asegurar que solo usuarios autorizados accedan a funciones administrativas.
+ * Consumo de API: Configuración de variables de entorno para conectar de forma dinámica con el entorno de producción en Render.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## Funcionalidades Clave
+En desarrollo.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Implementaciones faltantes:
+
+* Media queries para que la interfaz sea responsive ya que actualmente se ve mejor en computadores
+* Avisos de exito o fracaso en operaciones realizadas (actualmente están con alert())
