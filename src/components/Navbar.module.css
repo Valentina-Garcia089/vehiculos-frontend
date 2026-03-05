@@ -9,7 +9,7 @@
 
 .navbar {
     background-color: var(--background-color);
-    height: 70px; /*TODO - tener en cuenta para calcular el alto del landing*/
+    min-height: 70px; /*TODO - tener en cuenta para calcular el alto del landing*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -196,5 +196,16 @@
 
 .btn-login:hover {
     color: var(--main-btn-color);
+}
+
+
+@media (max-width: 480px) {
+    .navbar{
+        padding: 10px 20px;
+    }
+
+    .nav-logo h3 {
+        display: none;
+    }
 }
 
