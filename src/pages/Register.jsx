@@ -1,4 +1,5 @@
 import styles from "./Login.module.css"
+import stylesR from "./Register.module.css"
 import background from "../assets/background/haikei.png"
 
 import { useNavigate, Link } from 'react-router-dom';
@@ -60,24 +61,27 @@ function Register (){
 
                     {errorMsg && <p className={styles['error-message']}>{errorMsg}</p>}
 
-                    <input 
-                        className={styles['login-input']}
-                        type="text"
-                        name="nombre"
-                        placeholder="Nombre"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input 
-                        className={styles['login-input']}
-                        type="text"
-                        name="apellido"
-                        placeholder="Apellido"
-                        value={formData.apellido}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className={stylesR['inputs-container']}>
+                        <input 
+                            className={styles['login-input']}
+                            type="text"
+                            name="nombre"
+                            placeholder="Nombre"
+                            value={formData.nombre}
+                            onChange={handleChange}
+                            required
+                        />
+                        <input 
+                            className={styles['login-input']}
+                            type="text"
+                            name="apellido"
+                            placeholder="Apellido"
+                            value={formData.apellido}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
                     <input 
                         className={styles['login-input']}
                         type="email"

@@ -1,0 +1,13 @@
+/*
+    Corregir estilos mínimos del register
+    Los otros estilos están en el login
+*/
+
+.inputs-container{
+    display: flex;
+    gap: 18px;
+}
+
+.inputs-container input{
+    width: 48%;
+}
