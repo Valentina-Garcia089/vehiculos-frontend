@@ -10,12 +10,14 @@ function Login(){
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState(""); //solo en caso de que se tenga un error
 
     const navigate = useNavigate();
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        setLoading(true);
         setErrorMsg("");
 
         try{
@@ -43,6 +45,8 @@ function Login(){
         } catch (error){
             setErrorMsg("Tus datos no son correctos");
             console.error("Error: ", error);
+        }finally {
+            setLoading(false);
         }
     };
 
@@ -82,8 +86,12 @@ function Login(){
                             onChange={(e) => setPassword(e.target.value)}
                         />
 
-                        <button type="submit" className={styles['login-button']}>
-                            Entrar
+                        <button 
+                            type="submit" 
+                            className={styles['login-button']}
+                            disabled={loading}
+                        >
+                            {loading ? "Cargando..." : "Entrar"}
                         </button>
                     </form>
                 </div>
