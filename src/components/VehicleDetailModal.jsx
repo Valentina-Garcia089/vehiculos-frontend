@@ -46,6 +46,12 @@ function VehicleDetailModal ({ isModalOpen, selectedVehicle, onClose, onRefresh 
     return (
         <div className={styles['modal-overlay']}>
             <div className={styles['modal-content']}>
+                <div className={styles['modal-header-phone']}>
+                    <h2>{selectedVehicle.marca} {selectedVehicle.modelo}</h2>
+                    <button onClick={onClose} className={styles['btn-close']}>&times;</button>
+                </div>
+                <h2 className={styles['modal-vehicle-price-phone']}>${new Intl.NumberFormat().format(selectedVehicle.precio)} COP</h2>
+
                 <div className={styles['modal-left']}>
                     <div className={styles['main-image-container']}>
                         <img src={selectedImage} alt="Imagen principal del vehiculo" />
@@ -75,9 +81,7 @@ function VehicleDetailModal ({ isModalOpen, selectedVehicle, onClose, onRefresh 
                         <h2>{selectedVehicle.marca} {selectedVehicle.modelo}</h2>
                         <button onClick={onClose} className={styles['btn-close']}>&times;</button>
                     </div>
-
                     <h2 className={styles['modal-vehicle-price']}>${new Intl.NumberFormat().format(selectedVehicle.precio)} COP</h2>
-
                     <div className={styles['grid-cards-container']}>
                         <div className={styles['card-info-container']}>
                             <h4>Kilometraje</h4>

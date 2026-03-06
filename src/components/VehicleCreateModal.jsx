@@ -61,7 +61,7 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
                 })
             }
         }
-    }, [vehicleToEdit, isOpen])
+    }, [isOpen])
 
 
 
@@ -94,13 +94,10 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
         setFormData(prev => {
             const tieneGaleria = prev.imagenes.length > 0;
             
-            //si la galería tiene elementos, el primero pasa a ser la imagen principal
-            const nuevaPrincipal = tieneGaleria ? prev.imagenes[0] : "";
-
+            //si hay algo en la galeria, se saca el primer elemento
             //si se sube a principal, hay que quitarla de la galeria para que no quede repetida
-            const nuevasSecundarias = tieneGaleria 
-                ? prev.imagenes.filter((_, index) => index !== 0) 
-                : [];
+            const nuevasSecundarias = [...prev.imagenes];
+            const nuevaPrincipal = tieneGaleria ? nuevasSecundarias.shift() : "";
 
             return {
                 ...prev,
@@ -116,7 +113,9 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
         const { name, value, type } = e.target;
         setFormData({
             ...formData,
-            [name]: type === 'number' ? (value === '' ? '' : Number(value)) : value
+            [name]: type === 'number' 
+            ? (value === '' ? '' : Math.abs(Number(value))) 
+            : value
         });
     };
 
@@ -190,7 +189,7 @@ function VehicleModal ({ isOpen, onClose, onRefresh, vehicleToEdit = null }){
                         
                         <label className={styles['label-group']}>
                             <span>Kilometraje</span>
-                            <input value={formData.kilometraje} type="number" name="kilometraje" placeholder="Ej: 200" onChange={handleChange} required />
+                            <input value={formData.kilometraje} type="number" name="kilometraje" min="0" placeholder="Ej: 200" onChange={handleChange} required />
                         </label>
                         
                         <label className={styles['label-group']}>

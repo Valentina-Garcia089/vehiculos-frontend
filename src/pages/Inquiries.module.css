@@ -286,3 +286,23 @@
     opacity: 0.3;
     cursor: not-allowed;
 }
+
+
+
+/*CELULARES*/
+@media (max-width: 1024px) {
+    .inquiries-container {
+        grid-template-columns: 1fr; /* Una sola columna */
+        padding: 1rem;
+    }
+
+    .inquiry-detail-view {
+        position: relative; /* Quita el sticky en móvil */
+        top: 0;
+        margin-top: 2rem;
+    }
+    
+    .list-header h2 {
+        font-size: 2rem; /* Título más pequeño en móvil */
+    }
+}
