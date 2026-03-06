@@ -9,6 +9,7 @@ import axios from "axios"
 function Register (){
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const [errorMsg, setErrorMsg] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -38,6 +39,8 @@ function Register (){
         }catch (error){
             setErrorMsg("Error al registrarse. Revise los datos");
             console.error("Error: ", error);
+        }finally {
+            setLoading(false);
         }
     }
 
@@ -109,8 +112,11 @@ function Register (){
                         required
                     />
 
-                    <button type="submit" className={styles['login-button']}>
-                        Registrarse
+                    <button type="submit" 
+                        className={styles['login-button']} 
+                        disabled={loading}
+                    >
+                        {loading ? "Cargando..." : "Registrarse"}
                     </button>
 
                     <p className={styles['description']}>

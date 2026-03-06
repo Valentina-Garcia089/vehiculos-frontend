@@ -100,6 +100,11 @@
     background-color: #1146ae;
 }
 
+.login-button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+}
+
 .description{
     font-size: 14px;
     text-align: center;
