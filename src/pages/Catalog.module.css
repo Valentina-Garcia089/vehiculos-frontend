@@ -10,8 +10,10 @@
 
 .catalog-page {
     background-color: var(--background-color);
-    min-height: 100vh;
+    min-height: 100vh; /*para no ver el borde blanco del fondo*/
+    width: 100%;
     color: var(--main-text-color);
+    overflow-x: hidden;
 }
 
 .main-content {
@@ -195,4 +197,77 @@
 .pagination button:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+}
+
+
+
+/*CELULARES*/
+@media (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .filter-sidebar {
+        width: 100%;
+        height: auto;
+    }
+
+    .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+
+    .header-text h1 {
+        font-size: 2rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .inventory-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .sort-select {
+        width: 100%;
+    }
+
+    .vehicle-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+        gap: 16px;
+    }
+    
+    .v-title {
+        max-width: 100%;
+        font-size: 1rem;
+    }
+
+    .v-price{
+        font-size: 1rem;
+    }
+}
+
+
+@media (max-width: 390px) {   
+    .v-title {
+        max-width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .v-price{
+        font-size: 0.9rem;
+    }
+
+    .spec-item {
+        font-size: 0.73rem;
+    }
 }
