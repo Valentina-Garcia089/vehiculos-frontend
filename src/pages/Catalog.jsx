@@ -14,7 +14,7 @@ function Catalog (){
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
-    const brands = ['BMW', 'TESLA', 'PORSCHE', 'TOYOTA', 'KIA', 'RENAULT', 'AUDI', 'JEEP', 'CARRITO'];
+    const brands = ['BMW', 'TESLA', 'PORSCHE', 'TOYOTA', 'KIA', 'RENAULT', 'AUDI', 'JEEP'];
 
 
     const fetchVehicles = useCallback(async (page = 0) => {

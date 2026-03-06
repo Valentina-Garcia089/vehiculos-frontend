@@ -54,7 +54,6 @@ function Register (){
                         className={styles['background-img']}
                     />
                 </div>
-
                 <form onSubmit={handleSubmit} className={styles['login-card']}>
                     <h2>BuscaTuVehiculo</h2>
                     <p className={styles['description']}>Crea una cuenta</p>

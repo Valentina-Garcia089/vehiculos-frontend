@@ -207,5 +207,13 @@
     .nav-logo h3 {
         display: none;
     }
+
+    .nav-right{
+        gap: 18px;
+    }
+
+    .user-role{
+        display: none;
+    }
 }
 

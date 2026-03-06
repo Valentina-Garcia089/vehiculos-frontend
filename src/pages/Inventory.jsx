@@ -108,52 +108,63 @@ function Inventory() {
                             </tr>
                         </thead>
                         <tbody>
-                            {vehicles.map((v) => (
-                                <tr key={v.id}>
-                                    <td>
-                                        <div className={styles['vehicle-info']}>
-                                            <div className={styles['img-container']}>
-                                                <img src={v.imageUrl} alt="imagen principal del vehiculo" />
+                            {vehicles.length > 0 ? (
+                                vehicles.map((v) => (
+                                    <tr key={v.id}>
+                                        <td>
+                                            <div className={styles['vehicle-info']}>
+                                                <div className={styles['img-container']}>
+                                                    <img src={v.imageUrl} alt="imagen principal del vehiculo" />
+                                                </div>
+                                                <div className={styles['info-container']}>
+                                                    <strong>{v.marca} {v.modelo}</strong>
+                                                    <span>ID: ADM-{v.id}</span>
+                                                </div>
                                             </div>
-                                            <div className={styles['info-container']}>
-                                                <strong>{v.marca} {v.modelo}</strong>
-                                                <span>ID: ADM-{v.id}</span>
+                                        </td>
+                                        <td>
+                                            <div className={styles['vehicle-details']}>
+                                                <div className={styles['details-top-container']}>
+                                                    {v.gasolina}
+                                                </div>
+                                                {v.year} - {v.kilometraje} km
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={styles['vehicle-details']}>
-                                            <div className={styles['details-top-container']}>
-                                                {v.gasolina}
+                                        </td>
+                                        <td>
+                                            <div className={styles['vehicle-price']}>
+                                                ${new Intl.NumberFormat().format(v.precio)}
                                             </div>
-                                            {v.year} - {v.kilometraje} km
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={styles['vehicle-price']}>
-                                            ${new Intl.NumberFormat().format(v.precio)}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className={styles['actions']}>
-                                            <button 
-                                                onClick={() => handleEditClick(v)} 
-                                                className={styles['btn-edit']} 
-                                                title="Editar"
-                                            >
-                                                <img src={editIcon} alt="editar vehiculo" />
-                                            </button>
-                                            <button
-                                                onClick={() => handleDeleteClick(v.id)}
-                                                className={styles['btn-delete']} 
-                                                title="Eliminar"
-                                            >
-                                                <img src={deleteIcon} alt="eliminar vehiculo" />
-                                            </button>
+                                        </td>
+                                        <td>
+                                            <div className={styles['actions']}>
+                                                <button 
+                                                    onClick={() => handleEditClick(v)} 
+                                                    className={styles['btn-edit']} 
+                                                    title="Editar"
+                                                >
+                                                    <img src={editIcon} alt="editar vehiculo" />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteClick(v.id)}
+                                                    className={styles['btn-delete']} 
+                                                    title="Eliminar"
+                                                >
+                                                    <img src={deleteIcon} alt="eliminar vehiculo" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className={styles['empty-state']}>
+                                        <div className={styles['empty-container']}>
+                                            <p>No hay vehículos en el inventario.</p>
+                                            <span>Comienza agregando uno nuevo para gestionar tu stock.</span>
                                         </div>
                                     </td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>
