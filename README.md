@@ -26,5 +26,4 @@ En desarrollo.
 
 Implementaciones faltantes:
 
-* Media queries para que la interfaz sea responsive ya que actualmente se ve mejor en computadores
 * Avisos de exito o fracaso en operaciones realizadas (actualmente están con alert())
