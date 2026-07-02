@@ -47,7 +47,7 @@ function Navbar(){
         localStorage.removeItem("token");
         setUserRole(null);
         setIsMenuOpen(false);
-        navigate("/login");
+        window.location.href = "/catalog";
     };
 
 
