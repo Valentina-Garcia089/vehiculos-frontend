@@ -14,7 +14,6 @@
     min-height: calc(100vh - 70px);
     padding: 3%;
     color: var(--main-text-color);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +33,7 @@
     border-radius: 32px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     
-    padding: 70px 3%; 
+    padding: 65px 3%; 
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
@@ -81,6 +80,10 @@
     bottom: 0;
     z-index: 2; /*Esta tarjeta superpone a la otra*/
     transform: rotate(-7deg);
+
+    animation: estarSobreTarjeta linear both;
+    animation-timeline: scroll(root block); 
+    animation-range: entry 0% exit 27%;
 }
 
 .small-card {
@@ -92,7 +95,7 @@
 
     animation: esconderTarjeta linear both;
     animation-timeline: scroll(root block); /* vincular la animación al scroll vertical del contenedor root*/
-    animation-range: entry 0% exit 30%; /*rango de scroll que no espera hasta el final de la pagina*/
+    animation-range: entry 0% exit 27%; /*rango de scroll que no espera hasta el final de la pagina*/
 }
 
 .landing-content {
@@ -147,7 +150,17 @@
     }
     100% {
         /* Nota: Ajusta los valores de translate (-35%, 40%) si necesitas que quede más centrada detrás de la grande */
-        transform: rotate(-7deg) translate(-35%, 40%);
+        transform: rotate(0deg) translate(-35%, 50%);
+    }
+}
+
+
+@keyframes estarSobreTarjeta {
+    0% {
+        transform: rotate(-7deg) translate(0, 0);
+    }
+    100% {
+        transform: rotate(0deg) translate(12%, -50%);
     }
 }
 
@@ -163,6 +176,7 @@
     .landing-overlay {
         flex-direction: column;
         align-items: center;
+        padding: 40px 3%; 
     }
 
     .landing-overlay::before {
