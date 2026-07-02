@@ -127,7 +127,7 @@ function Catalog (){
                     <header className={styles['inventory-header']}>
                         <div className={styles['header-text']}>
                             <h1>Catálogo de Vehiculos</h1>
-                            <p>Se encontraron {vehicles.length} resultados</p>
+                            <p>Resultados encontrados: {vehicles.length} </p>
                         </div>
                         <div className={styles['header-actions']}>
                             <select 
@@ -155,13 +155,14 @@ function Catalog (){
                                 
                                 <div className={styles['card-body']}>
                                     <div className={styles['card-header-info']}>
-                                        <h4 className={styles['v-title']}>{v.year} {v.marca} {v.modelo}</h4>
-                                        <p className={styles['v-price']}>
-                                            ${new Intl.NumberFormat().format(v.precio)} COP
-                                        </p>
+                                        <h4 className={styles['v-title']}>{v.marca} {v.modelo}</h4>
                                     </div>
 
                                     <div className={styles['spec-row']}>
+                                        <div className={styles['spec-item']}>
+                                            <span className={styles['spec-title']}>Año</span>
+                                            <span className={styles['spec-value']}>{v.year}</span>
+                                        </div>
                                         <div className={styles['spec-item']}>
                                             <span className={styles['spec-title']}>Kilometraje</span>
                                             <span className={styles['spec-value']}>{v.kilometraje.toLocaleString()} km</span>
@@ -175,6 +176,10 @@ function Catalog (){
                                             <span className={styles['spec-value']}>{v.gasolina}</span>
                                         </div>
                                     </div>
+
+                                    <p className={styles['v-price']}>
+                                            ${new Intl.NumberFormat().format(v.precio)} COP
+                                    </p>
                                 </div>
                             </div>
                         ))}

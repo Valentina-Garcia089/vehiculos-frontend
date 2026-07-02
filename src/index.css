@@ -10,6 +10,7 @@ html, body, #root {
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    overflow-x: hidden; /*No se puede dejar height con overflow-x porque causa problemas con las aniamciones de scroll*/
+    /*no se puede dejar height con overflow-x porque causa problemas con las aniamciones de scroll*/
+    overflow-x: hidden;
     overflow-y: auto;
 }

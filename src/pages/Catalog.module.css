@@ -116,7 +116,6 @@
 .vehicle-card:hover {
     transform: translateY(-10px);
     background-color: transparent;
-    border-color: #3b82f6;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
@@ -137,30 +136,31 @@
 
 .card-header-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     margin-bottom: 12px;
 }
 
 .v-title {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 600;
     max-width: 60%;
 }
 
 .v-price {
-    color: var(--main-text-color);
-    font-weight: 700;
-    font-size: 1.1rem;
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 
 .spec-row {
     display: flex;
-    justify-content: space-between;
-    border-top: 1px solid var(--border-color);
-    padding-top: 16px;
+    justify-content:flex-start;
+    border-bottom: 1px solid var(--border-color);
+    padding: 4px 0 16px 0;
     margin-bottom: 20px;
+    gap: 30px;
 }
 
 .spec-item {
@@ -168,7 +168,6 @@
     color: var(--text);
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 4px;
 }
 
