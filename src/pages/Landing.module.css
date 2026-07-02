@@ -1,6 +1,6 @@
 :root{
     --background-color: #0c0f17;
-    --main-text-color: #FFFFFF;
+    --main-text-color: #ffffff;
     --text: #94A3B8;
     --table-color: #111722;
     --main-btn-color: #1152D4;
@@ -34,7 +34,7 @@
     border-radius: 32px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     
-    padding: 48px 3%; 
+    padding: 70px 3%; 
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
@@ -59,6 +59,7 @@
     max-width: 500px;
     aspect-ratio: 5 / 4.2;
 }
+
 
 .big-card, .small-card {
     position: absolute;
@@ -89,16 +90,9 @@
     z-index: 1; /*Detras de*/
     transform: rotate(10deg);
 
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
-                right 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
-                top 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-
-.small-card.is-scrolled {
-    right: 20%;/*mover hacia la izquierda*/
-    top: 25%;
-    transform: rotate(-7deg) scale(0.95); /*iguala la rotación*/
+    animation: esconderTarjeta linear both;
+    animation-timeline: scroll(root block); /* vincular la animación al scroll vertical del contenedor root*/
+    animation-range: entry 0% exit 30%; /*rango de scroll que no espera hasta el final de la pagina*/
 }
 
 .landing-content {
@@ -147,6 +141,18 @@
 }
 
 
+@keyframes esconderTarjeta {
+    0% {
+        transform: rotate(10deg) translate(0, 0);
+    }
+    100% {
+        /* Nota: Ajusta los valores de translate (-35%, 40%) si necesitas que quede más centrada detrás de la grande */
+        transform: rotate(-7deg) translate(-35%, 40%);
+    }
+}
+
+
+
 /* CELULARES */
 @media (max-width: 920px) {
     .landing-container {
@@ -174,11 +180,11 @@
         align-items: center;
     }
 
-
     .cards-container {
         margin-left: 0;
         margin-top: 6rem;
         max-width: 380px;
     }
 }
+
 

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import styles from "./Landing.module.css"
+import styles from "./Landing.module.css";
 import bigCard from  "/fotograma-2.png";
 import smallCard from  "/fotograma-3.png";
 import BrandsCarousel from "../components/BrandsCarousel";
@@ -7,22 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Landing (){
     const navigate = useNavigate();
-
-    const [scrolled, setScrolled] = useState(false); //¿El usuario hizo scroll hacia abajo?
-
-    useEffect(() => {
-        const handleScroll = () => {
-            // Si baja más de 50px, activamos el efecto
-            if (window.scrollY > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll); //se limpia el listener al desmontar el componente
-    }, []);
 
     return(
         <div className={styles['landing-container']}>
@@ -47,12 +30,11 @@ function Landing (){
                 </div>
 
                 <div className={styles['cards-container']}>
-                    {/* clase dinámica */}
-                    <div className={`${styles['small-card']} ${scrolled ? styles['is-scrolled'] : ''}`}>
-                        <img src={smallCard} alt="Small Card" />
-                    </div>
                     <div className={styles['big-card']}>
                         <img src={bigCard} alt="Big Card" />
+                    </div>
+                    <div className={styles['small-card']}>
+                        <img src={smallCard} alt="Small Card" />
                     </div>
                 </div>
 
