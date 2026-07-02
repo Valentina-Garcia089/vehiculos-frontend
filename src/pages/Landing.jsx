@@ -1,6 +1,6 @@
 import styles from "./Landing.module.css";
-import bigCard from  "/fotograma-2.png";
-import smallCard from  "/fotograma-3.png";
+import bigCard from  "/fotograma-2.webp";
+import smallCard from  "/fotograma-3.webp";
 import BrandsCarousel from "../components/BrandsCarousel";
 import { useNavigate } from 'react-router-dom';
 
@@ -31,10 +31,10 @@ function Landing (){
 
                 <div className={styles['cards-container']}>
                     <div className={styles['big-card']}>
-                        <img src={bigCard} alt="Big Card" />
+                        <img src={bigCard} alt="Big Card" loading="eager" fetchpriority="high" />
                     </div>
                     <div className={styles['small-card']}>
-                        <img src={smallCard} alt="Small Card" />
+                        <img src={smallCard} alt="Small Card" loading="eager" fetchpriority="high" />
                     </div>
                 </div>
 
