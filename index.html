@@ -7,8 +7,36 @@
 
     <meta name="description" content="Explora nuestro catálogo exclusivo de vehículos. Encuentra las mejores ofertas, gestiona tu inventario y realiza consultas en línea fácilmente." />
 
+    <link rel="icon" type="image/png" href="/src/assets/icons/logo.png">
+
+    <link rel="canonical" href="https://vehiculos-front.vercel.app/" />
+
     <link rel="preload" href="/fotograma-2.webp" as="image" type="image/webp" />
     <link rel="preload" href="/fotograma-3.webp" as="image" type="image/webp" />
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutomotiveBusiness", 
+      "name": "Tu Negocio de Vehículos",
+      "url": "https://vehiculos-front.vercel.app",
+      "logo": "https://vehiculos-front.vercel.app/logo.png",
+      "description": "Selección de primer nivel para que encuentres el vehículo que encaja perfectamente con tu estilo de vida.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Principal 123",
+        "addressLocality": "Bogotà",
+        "addressCountry": "CO"
+      },
+      "telephone": "+57 300 123 4567",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://vehiculos-front.vercel.app/catalog?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </head>
 
   <body>
