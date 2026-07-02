@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -32,6 +33,8 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
+
+      {!hideNavbarPaths.includes(location.pathname) && <Footer />}
     </>
   )
 }
